@@ -338,6 +338,12 @@
               "android": "2.0.1"
             }
           }
+        },
+        "bubble": {
+          "doc": "A filled bubble"
+        },
+        "dotdensity": {
+          "doc": "Dots"
         }
       },
       "doc": "Rendering type of this layer."
@@ -385,6 +391,10 @@
     "paint.*": {
       "type": "paint",
       "doc": "[Deprecated] Class-specific paint properties for this layer. The class name is the part after the first dot. Note: class-specific paint properties are deprecated and will be removed in the next version of this spec."
+    },
+    "auto-source": {
+      "type": "array",
+      "value": "layer"
     }
   },
   "layout": [
@@ -394,7 +404,9 @@
     "layout_fill-extrusion",
     "layout_symbol",
     "layout_raster",
-    "layout_background"
+    "layout_background",
+    "layout_bubble",
+    "layout_dotdensity"
   ],
   "layout_background": {
     "visibility": {
@@ -1421,6 +1433,31 @@
       }
     }
   },
+  "layout_dotdensity": {
+    "visibility": {
+      "type": "enum",
+      "function": "piecewise-constant",
+      "values": [
+        "visible",
+        "none"
+      ],
+      "default": "visible",
+      "doc": "The display of this layer. `none` hides this layer."
+    },
+    "dotdensity-count": {
+      "type": "string",
+      "function": "piecewise-constant",
+      "tokens": true,
+      "doc": "Value to use for dots count calculation. Feature properties are specified using tokens like \"{field_name} * 2\"."
+    },
+    "dotdensity-seed": {
+      "type": "number",
+      "default": 1,
+      "function": "interpolated",
+      "transition": true,
+      "doc": "Dot density seed."
+    }
+  },
   "filter": {
     "type": "array",
     "value": "*",
@@ -1467,6 +1504,9 @@
       },
       "!has": {
           "doc": "`[\"!has\", key]` `feature[key]` does not exist"
+      },
+      "=~": {
+        "doc": "`[\"!=\", key, value]` inequality: `feature[key] ≠ value`"
       }
     },
     "doc": "The filter operator."
@@ -1517,7 +1557,11 @@
           },
           "categorical": {
               "doc": "Return the output value of the stop equal to the function input."
+          },
+          "dragonfly-interval": {
+            "doc": "Return the output value of the stop just less than the function input."
           }
+
       },
       "doc": "The interpolation strategy to use in function evaluation.",
       "default": "exponential"
@@ -1626,7 +1670,9 @@
     "paint_fill-extrusion",
     "paint_symbol",
     "paint_raster",
-    "paint_background"
+    "paint_background",
+    "paint_bubble",
+    "paint_dotdensity"
   ],
   "paint_fill": {
     "fill-antialias": {
@@ -1936,6 +1982,11 @@
           "ios": "2.0.0",
           "android": "2.0.1"
         }
+      },
+      "line-query-as-fill": {
+        "type": "boolean",
+        "default": true,
+        "doc": "Treat querying of line layer as if it were a fill, i.e. detect intersections within the enclosing polygon."
       }
     },
     "line-color": {
@@ -2803,6 +2854,108 @@
           "android": "2.0.1"
         }
       }
+    }
+  },
+  "paint_bubble": {
+    "bubble-radius-multiplier": {
+      "type": "number",
+      "default": 1,
+      "minimum": 0,
+      "function": "interpolated",
+      "transition": true,
+      "requires": [
+        "bubble-radius"
+      ],
+      "doc": "The multiplier for the radius size (changing this is fast)."
+    },
+    "bubble-color": {
+      "type": "color",
+      "default": "#000000",
+      "doc": "The color of the bubble.",
+      "function": "interpolated",
+      "transition": true
+    },
+    "bubble-outline-color": {
+      "type": "color",
+      "default": "#000000",
+      "doc": "The color of the bubble\"s rim.",
+      "function": "interpolated",
+      "transition": true
+    },
+    "bubble-outline-width": {
+      "type": "number",
+      "default": 2,
+      "minimum": 0,
+      "function": "interpolated",
+      "transition": true,
+      "units": "pixels",
+      "doc": "Width of the bubble\"s rim."
+    },
+    "bubble-opacity": {
+      "type": "number",
+      "doc": "The opacity at which the bubble will be drawn.",
+      "default": 1,
+      "minimum": 0,
+      "maximum": 1,
+      "function": "interpolated",
+      "transition": true
+    },
+    "bubble-translate": {
+      "type": "array",
+      "value": "number",
+      "length": 2,
+      "default": [0, 0],
+      "function": "interpolated",
+      "transition": true,
+      "units": "pixels",
+      "doc": "The geometry\"s offset. Values are [x, y] where negatives indicate left and up, respectively."
+    },
+    "bubble-translate-anchor": {
+      "type": "enum",
+      "function": "piecewise-constant",
+      "values": [
+        "map",
+        "viewport"
+      ],
+      "doc": "Control whether the translation is relative to the map (north) or viewport (screen)",
+      "default": "map",
+      "requires": [
+        "bubble-translate"
+      ]
+    }
+  },
+  "paint_dotdensity": {
+    "dotdensity-radius": {
+      "type": "number",
+      "default": 3,
+      "minimum": 0,
+      "function": "interpolated",
+      "transition": true,
+      "units": "pixels",
+      "doc": "Dot radius."
+    },
+    "dotdensity-color": {
+      "type": "color",
+      "default": "#000000",
+      "doc": "The color of each dot.",
+      "function": "interpolated",
+      "transition": true
+    },
+    "dotdensity-opacity": {
+      "type": "number",
+      "doc": "The opacity at which the dot will be drawn.",
+      "default": 1,
+      "minimum": 0,
+      "maximum": 1,
+      "function": "interpolated",
+      "transition": true
+    },
+    "dotdensity-blur": {
+      "type": "number",
+      "default": 0,
+      "doc": "Amount to blur the dot. 1 blurs the dot such that only the centerpoint is full opacity.",
+      "function": "interpolated",
+      "transition": true
     }
   },
   "transition": {
