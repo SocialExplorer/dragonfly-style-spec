@@ -1458,6 +1458,24 @@
       "doc": "Dot density seed."
     }
   },
+  "layout_bubble": {
+    "visibility": {
+      "type": "enum",
+      "function": "piecewise-constant",
+      "values": [
+        "visible",
+        "none"
+      ],
+      "default": "visible",
+      "doc": "The display of this layer. `none` hides this layer."
+    },
+    "bubble-radius": {
+      "type": "string",
+      "function": "piecewise-constant",
+      "tokens": true,
+      "doc": "Value to use for a radius calculation. Feature properties are specified using tokens like '{field_name} * 2'."
+    }
+  },
   "filter": {
     "type": "array",
     "value": "*",
@@ -1966,6 +1984,11 @@
     }
   },
   "paint_line": {
+    "line-query-as-fill": {
+      "type": "boolean",
+      "default": true,
+      "doc": "Treat querying of line layer as if it were a fill, i.e. detect intersections within the enclosing polygon."
+    },
     "line-opacity": {
       "type": "number",
       "doc": "The opacity at which the line will be drawn.",
@@ -1982,11 +2005,6 @@
           "ios": "2.0.0",
           "android": "2.0.1"
         }
-      },
-      "line-query-as-fill": {
-        "type": "boolean",
-        "default": true,
-        "doc": "Treat querying of line layer as if it were a fill, i.e. detect intersections within the enclosing polygon."
       }
     },
     "line-color": {
