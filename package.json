@@ -1,7 +1,7 @@
 {
-  "name": "mapbox-gl-style-spec",
-  "description": "a specification for mapbox gl styles",
-  "version": "8.9.0",
+  "name": "dragonfly-style-spec",
+  "description": "a specification for dragonfly gl styles",
+  "version": "8.10.0",
   "author": "Mapbox",
   "bin": {
     "gl-style-migrate": "bin/gl-style-migrate",
@@ -41,7 +41,7 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git@github.com:mapbox/mapbox-gl-style-spec.git"
+    "url": "git@github.com/SocialExplorer/dragonfly-style-spec.git"
   },
   "scripts": {
     "build": "node minify.js && npm run docs",
