@@ -1578,8 +1578,10 @@
           },
           "dragonfly-interval": {
             "doc": "Return the output value of the stop just less than the function input."
+          },
+          "dragonfly-categorical": {
+            "doc": "Return the output value of the stop equal to the function input."
           }
-
       },
       "doc": "The interpolation strategy to use in function evaluation.",
       "default": "exponential"
