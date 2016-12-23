@@ -1524,7 +1524,13 @@
           "doc": "`[\"!has\", key]` `feature[key]` does not exist"
       },
       "=~": {
-        "doc": "`[\"!=\", key, value]` inequality: `feature[key] ≠ value`"
+        "doc": "`[\"=~\", key, value]` dragonfly regex filter`"
+      },
+      "!~": {
+        "doc": "`[\"!~\", key, value]` dragonfly regex filter`"
+      },
+      "x-radius": {
+        "doc": "`[\"x-radius\", center, radius]` dragonfly spatial filter`"
       }
     },
     "doc": "The filter operator."
