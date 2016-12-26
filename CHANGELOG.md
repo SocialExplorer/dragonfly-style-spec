@@ -1,4 +1,25 @@
-## master
+## 8.11.0
+
+* Merge `feature-filter` repository into this repository #639
+
+## 8.10.0
+
+v8.0.0 styles are fully compatible with v8.10.0.
+
+### Style Specification Changes
+
+* Added `colorSpace` option to functions
+* Added `fill-extrusion` layer type
+* Add top-level `light` property
+* Remove increase maximum `maxzoom` to 24
+* Deprecate paint classes :warning:
+* Increase strictness of function validation
+
+### Reference JSON & API Changes
+
+* Added `deref` utility
+* Added `group_by_layout` utility
+* Merge `mapbox-gl-function` repository into this repository
 
 ## 8.9.0
 
