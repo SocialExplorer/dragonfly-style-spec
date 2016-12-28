@@ -1,7 +1,7 @@
 {
   "name": "dragonfly-style-spec",
   "description": "a specification for dragonfly gl styles",
-  "version": "8.10.0",
+  "version": "8.11.0",
   "author": "Mapbox",
   "bin": {
     "gl-style-migrate": "bin/gl-style-migrate",
