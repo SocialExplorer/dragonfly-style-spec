@@ -2865,9 +2865,8 @@
       "transition": true
     },
     "bubble-outline-width": {
-      "type": "number",
-      "default": 2,
-      "minimum": 0,
+      "type": "string",
+      "default": "2",
       "function": "interpolated",
       "transition": true,
       "units": "pixels",
