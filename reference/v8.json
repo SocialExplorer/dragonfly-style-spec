@@ -2883,7 +2883,7 @@
         "bubble-max-radius"
       ]
     },
-    "bubble-max-radius-outline-width-multiplier": {
+    "bubble-max-radius-outline-width": {
       "type": "number",
       "default": 1,
       "minimum": 0,
@@ -2892,7 +2892,7 @@
       "requires": [
         "bubble-max-radius"
       ],
-      "doc": "The multiplier for the outline width when max radius reached."
+      "doc": "The width of the bubble\"s rim when max radius reached."
     },
     "bubble-outline-width": {
       "type": "string",
