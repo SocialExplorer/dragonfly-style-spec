@@ -2864,6 +2864,36 @@
       "function": "interpolated",
       "transition": true
     },
+    "bubble-max-radius": {
+      "type": "number",
+      "function": "interpolated",
+      "transition": true,
+      "requires": [
+        "bubble-radius"
+      ],
+      "doc": "The max value for the radius size."
+    },
+    "bubble-max-radius-outline-color": {
+      "type": "color",
+      "default": "#000000",
+      "doc": "The color of the bubble\"s rim when max radius reached.",
+      "function": "interpolated",
+      "transition": true,
+      "requires": [
+        "bubble-max-radius"
+      ]
+    },
+    "bubble-max-radius-outline-width-multiplier": {
+      "type": "number",
+      "default": 1,
+      "minimum": 0,
+      "function": "interpolated",
+      "transition": true,
+      "requires": [
+        "bubble-max-radius"
+      ],
+      "doc": "The multiplier for the outline width when max radius reached."
+    },
     "bubble-outline-width": {
       "type": "string",
       "default": "2",
